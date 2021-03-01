@@ -28,7 +28,7 @@ tinderApp.controller("myCtrl", function($scope,$http) {
       $scope.showResult = false;
     $http({
         method : "POST",
-        url : "http://"+$scope.server+"/MemberLogin",
+        url : $scope.server+"/MemberLogin",
         data: JSON.stringify(requestBody)
       }).then(function mySuccess(response) {
           if(response.data.code == $scope.successCode){
@@ -38,7 +38,7 @@ tinderApp.controller("myCtrl", function($scope,$http) {
 
             $http({
                 method : "GET",
-                url : "http://"+$scope.server+"/MemberForUser/"+$scope.member.memberId,               
+                url : $scope.server+"/MemberForUser/"+$scope.member.memberId,               
               }).then(function mySuccess(response1) {                  
                 $scope.memberList = response1.data.data;
                 console.log($scope.memberList);
@@ -62,7 +62,7 @@ $scope.onSwipe = function(index1,swipeSide){
     $scope.showResult = false;
     $http({
         method : "POST",
-        url : "http://"+$scope.server+"/Member/"+$scope.member.memberId+"/Match/"+$scope.memberList[index1].memberId+"/"+swipeSide,        
+        url : $scope.server+"/Member/"+$scope.member.memberId+"/Match/"+$scope.memberList[index1].memberId+"/"+swipeSide,        
       }).then(function mySuccess(response2) {
         if(response2.data.code == "11")
             $scope.profileIndex= $scope.profileIndex +1;
@@ -76,7 +76,7 @@ $scope.shwResult =function(){
     $scope.showResult = false;
     $http({
         method : "GET",
-        url : "http://"+$scope.server+"/Member/"+$scope.member.memberId+"/matchCount",               
+        url : $scope.server+"/Member/"+$scope.member.memberId+"/matchCount",               
       }).then(function mySuccess(response11) {      
         if(response11.data.code == "11")  {
          $scope.rightCount =response11.data.data.Right;
